@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import { NativeLink as Link } from "./NativeLink";
 
 export function SiteFooter(){
   return <footer className="site-footer">

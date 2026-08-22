@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import { NativeLink as Link } from "@/components/NativeLink";
 import { Factory, Fuel, HeartHandshake, Ship } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";

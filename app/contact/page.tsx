@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import { NativeLink as Link } from "@/components/NativeLink";
 import { Clock3, Mail, MapPin, Phone, Send } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
