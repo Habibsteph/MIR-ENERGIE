@@ -49,7 +49,7 @@ export default function AboutPage() {
     <main id="top" className="about-page">
       <section className="services-cover about-cover">
         <Image
-          src="/field-worker.jpg"
+          src="/field-worker-branded.png"
           alt="Professionnel du secteur énergétique sur le terrain"
           fill
           priority

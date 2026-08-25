@@ -39,8 +39,8 @@ export default function ServicesPage() {
     <main id="top" className="services-page">
       <section className="services-cover">
         <Image
-          src="/industrial-site.jpg"
-          alt="Installations énergétiques et industrielles"
+          src="/services-offshore-hero.png"
+          alt="Plateforme énergétique offshore"
           fill
           priority
           className="cover-img"
@@ -101,7 +101,7 @@ export default function ServicesPage() {
             <span className="media-accent media-accent-front" />
             <div className="services-benefit-image">
               <Image
-                src="/field-worker.jpg"
+                src="/field-worker-branded.png"
                 alt="Professionnel de l’énergie intervenant sur le terrain"
                 fill
                 className="cover-img"
@@ -115,7 +115,7 @@ export default function ServicesPage() {
 
           <div className="services-benefit-copy">
             <p className="overline">Une exécution maîtrisée</p>
-            <h3>Du besoin initial au suivi terrain.</h3>
+            <h3>Du besoin initial au suivi terrain</h3>
             <p className="services-benefit-lead">
               MIR Energie transforme une opération complexe en un parcours clair,
               piloté et documenté.

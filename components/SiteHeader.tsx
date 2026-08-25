@@ -14,7 +14,7 @@ export function SiteHeader({ overlay = false }: { overlay?: boolean }) {
     { href: "/contact", label: "Contact" },
   ];
   return <header className={`main-header ${overlay ? "is-overlay" : ""}`}>
-    <Link className="main-logo" href="/"><Image src="/logo-mir.png" alt="MIR Energie" width={116} height={56} priority /></Link>
+    <Link className="main-logo" href="/"><Image src="/logo-mir-white.png" alt="MIR Energie" width={190} height={94} priority /></Link>
     <nav className={open ? "main-nav open" : "main-nav"} aria-label="Navigation principale">
       {links.map((link) => {
         const active = pathname === link.href;
