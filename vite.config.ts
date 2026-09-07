@@ -4,11 +4,17 @@ import vinext from "vinext";
 import { defineConfig } from "vite";
 
 // macOS Seatbelt blocks FSEvents, so Codex previews need polling for HMR.
+const isSitesBuild = process.env.MIR_BUILD_TARGET === "sites";
 const isCodexSeatbeltSandbox = process.env.CODEX_SANDBOX === "seatbelt";
 
 export default defineConfig({
   server: isCodexSeatbeltSandbox
     ? { watch: { useFsEvents: false, usePolling: true } }
     : undefined,
-  plugins: [tailwindcss(), vinext(), nitro()],
+  plugins: [tailwindcss(), vinext(), nitro(isSitesBuild ? {
+    preset: "cloudflare_module",
+    compatibilityDate: "2026-09-07",
+    output: { dir: "dist", serverDir: "dist/server", publicDir: "dist/client" },
+    cloudflare: { deployConfig: false },
+  } : {})],
 });

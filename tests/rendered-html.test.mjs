@@ -1,91 +1,105 @@
 import assert from "node:assert/strict";
-import { access, readFile, readdir } from "node:fs/promises";
-import test from "node:test";
+import { spawn } from "node:child_process";
+import { once } from "node:events";
+import test, { after, before } from "node:test";
 
-const developmentPreviewMeta =
-  /<meta(?=[^>]*\bname=["']codex-preview["'])(?=[^>]*\bcontent=["']development["'])[^>]*>/i;
-const templateRoot = new URL("../", import.meta.url);
-const previewRoot = new URL("../app/_sites-preview/", import.meta.url);
-
-async function render() {
-  const workerUrl = new URL("../dist/server/index.js", import.meta.url);
-  workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
-  const { default: worker } = await import(workerUrl.href);
-
-  return worker.fetch(
-    new Request("http://localhost/", {
-      headers: { accept: "text/html" },
-    }),
-    {
-      ASSETS: {
-        fetch: async () => new Response("Not found", { status: 404 }),
-      },
-    },
-    {
-      waitUntil() {},
-      passThroughOnException() {},
-    },
-  );
-}
-
-test("server-renders the starter loading skeleton", async () => {
-  const response = await render();
-  assert.equal(response.status, 200);
-  assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
-
-  const html = await response.text();
-  assert.match(html, developmentPreviewMeta);
-  assert.match(html, /<title>Your site is taking shape<\/title>/i);
-  assert.match(html, /Building your site/);
-  assert.match(html, /Your site is taking shape/);
-  assert.match(
-    html,
-    /Your first version will appear here automatically when it’s ready\./,
-  );
-  assert.doesNotMatch(html, /Codex/);
-  assert.match(html, /react-loading-skeleton/);
-  assert.match(html, /role="status"/);
+let server;
+let origin;
+const pages = new Map();
+const routes = ["/", "/solutions", "/about", "/contact", "/legal-notice", "/privacy-policy"];
+before(async () => {
+  server = spawn(process.execPath, [".output/server/index.mjs"], {
+    cwd: new URL("../", import.meta.url),
+    env: { ...process.env, PORT: "0", NITRO_PORT: "0", HOST: "127.0.0.1", NITRO_HOST: "127.0.0.1" },
+    stdio: ["ignore", "pipe", "pipe"],
+  });
+  let output = "";
+  origin = await new Promise((resolve, reject) => {
+    const timeout = setTimeout(() => reject(new Error(`Server did not start: ${output}`)), 20000);
+    server.stdout.on("data", chunk => {
+      output += chunk;
+      const match = output.match(/http:\/\/127\.0\.0\.1:\d+/);
+      if (match) { clearTimeout(timeout); resolve(match[0]); }
+    });
+    server.stderr.on("data", chunk => { output += chunk; });
+    server.once("error", error => { clearTimeout(timeout); reject(error); });
+    server.once("exit", code => { clearTimeout(timeout); reject(new Error(`Server exited ${code}: ${output}`)); });
+  });
+  for (const route of routes) {
+    const response = await fetch(origin + route);
+    assert.equal(response.status, 200, route);
+    pages.set(route, await response.text());
+  }
+});
+after(async () => {
+  if (server && server.exitCode === null) {
+    const exited = once(server, "exit");
+    server.kill("SIGTERM");
+    await exited;
+  }
 });
 
-test("keeps the loading skeleton scoped and disposable", async () => {
-  const [preview, css, page, layout, packageJson, files] = await Promise.all([
-    readFile(new URL("SkeletonPreview.tsx", previewRoot), "utf8"),
-    readFile(new URL("preview.css", previewRoot), "utf8"),
-    readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
-    readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
-    readFile(new URL("../package.json", import.meta.url), "utf8"),
-    readdir(previewRoot),
-  ]);
+const visibleHtml = html => html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/g, "");
 
-  assert.deepEqual(files.sort(), ["SkeletonPreview.tsx", "preview.css"]);
-  assert.match(preview, /from "react-loading-skeleton"/);
-  assert.match(preview, /baseColor="#eceae7"/);
-  assert.match(preview, /highlightColor="#f9f8f6"/);
-  assert.match(preview, /duration=\{2\.8\}/);
-  assert.match(preview, /sites-skeleton-search-placeholder/);
-  assert.match(packageJson, /"react-loading-skeleton": "3\.5\.0"/);
+test("all public pages render English content and route-specific metadata", () => {
+  const titles = new Set();
+  for (const [route, html] of pages) {
+    assert.match(html, /<html[^>]*lang="en"/, route);
+    assert.equal((html.match(/<h1\b/g) || []).length, 1, route);
+    const title = html.match(/<title>(.*?)<\/title>/)?.[1];
+    assert.ok(title && title.includes("MIR ENERGY"), route);
+    assert.ok(!titles.has(title), `Duplicate title: ${route}`);
+    titles.add(title);
+    assert.match(html, /<meta name="description" content="[^"]+"/, route);
+    assert.match(html, /rel="canonical"/, route);
+    assert.doesNotMatch(visibleHtml(html), /MIR [ÉE]nergie|Demander|Accueil|Confidentialité|Forage|24\/7|contact@mirenergie\.com|\+225 00/, route);
+  }
+});
 
-  const shellIndex = preview.indexOf('className="sites-skeleton-shell"');
-  const statusIndex = preview.indexOf('className="sites-skeleton-status"');
-  assert.ok(shellIndex >= 0 && statusIndex > shellIndex);
-  assert.match(css, /position:\s*fixed/);
-  assert.match(css, /inset:\s*0/);
-  assert.match(css, /opacity:\s*0\.52/);
-  assert.match(css, /prefers-reduced-motion:\s*reduce/);
-  assert.doesNotMatch(css, /#020617|canvas|pets|progress/i);
-  assert.doesNotMatch(
-    preview,
-    /loading-spinner|status-mark|status-progress|canvas|cookie|random/i,
-  );
+test("old page URLs redirect permanently to their replacements", async () => {
+  for (const [oldPath, newPath] of [["/services", "/solutions"], ["/a-propos", "/about"]]) {
+    const response = await fetch(origin + oldPath, { redirect: "manual" });
+    assert.equal(response.status, 308, oldPath);
+    assert.equal(new URL(response.headers.get("location"), origin).pathname, newPath);
+  }
+});
 
-  assert.match(page, /export const metadata:\s*Metadata/);
-  assert.match(page, /"codex-preview": "development"/);
-  assert.match(page, /<SkeletonPreview \/>/);
-  assert.match(layout, /title:\s*"Starter Project"/);
-  assert.doesNotMatch(layout, /codex-preview|_sites-preview|themeColor|\bViewport\b/);
-  assert.doesNotMatch(css, /(^|\s)(html|body)\s*\{/m);
+test("internal links resolve and solution anchors point to distinct offers", async () => {
+  for (const [route, raw] of pages) {
+    const html = visibleHtml(raw);
+    for (const match of html.matchAll(/<a\b[^>]*href="([^"]+)"/g)) {
+      const href = match[1].replaceAll("&amp;", "&");
+      const target = new URL(href, origin + route);
+      if (target.origin !== origin) continue;
+      assert.ok(pages.has(target.pathname), `Missing route ${href} on ${route}`);
+      if (target.hash) assert.ok(pages.get(target.pathname).includes(`id="${target.hash.slice(1)}"`), `Missing anchor ${href}`);
+    }
+  }
+  for (const id of ["lng-supply", "logistics", "storage-regasification", "infrastructure"]) {
+    assert.ok(pages.get("/solutions").includes(`id="${id}"`));
+  }
+});
 
-  await assert.rejects(
-    access(new URL("public/_sites-preview", templateRoot)),
-  );
+test("inquiry form contains qualification fields and does not offer false submission", () => {
+  const html = visibleHtml(pages.get("/contact"));
+  for (const name of ["name", "company", "email", "phone", "service", "location", "capacity", "timeline", "message"]) assert.ok(html.includes(`name="${name}"`), name);
+  assert.match(html, /type="email"[^>]*required/);
+  assert.match(html, /<button[^>]*type="submit"[^>]*disabled/);
+  assert.match(html, /does not currently send inquiries/);
+  assert.doesNotMatch(html, /mailto:contact@|tel:\+2250/);
+});
+
+test("every rendered image and stylesheet can be served", async () => {
+  const urls = new Set();
+  for (const html of pages.values()) {
+    for (const match of visibleHtml(html).matchAll(/<(?:img|link)\b[^>]*(?:src|href)="([^"]+)"[^>]*>/g)) {
+      const url = match[1].replaceAll("&amp;", "&");
+      if (url.startsWith("/") && !routes.includes(url)) urls.add(url);
+    }
+  }
+  for (const url of urls) {
+    const response = await fetch(origin + url);
+    assert.equal(response.status, 200, url);
+    await response.body?.cancel();
+  }
 });

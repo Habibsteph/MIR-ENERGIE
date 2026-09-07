@@ -3,77 +3,73 @@ import { NativeLink as Link } from "@/components/NativeLink";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SectionIntro } from "@/components/SectionIntro";
+import { solutions } from "@/lib/content";
 
-const services = [
-  ["01","Import & export de gaz","Approvisionnement, négoce et acheminement sécurisé de produits énergétiques entre marchés internationaux."],
-  ["02","Logistique énergétique","Coordination des flux, suivi opérationnel et solutions de transport adaptées aux contraintes du secteur."],
-  ["03","Forage & infrastructures","Pilotage de projets techniques et d’infrastructures conçus pour les besoins réels des territoires."],
-  ["04","Projets à impact social","Construction et accompagnement d’initiatives durables au service des communautés locales."],
+const proof = [
+  ["Global supply network", "Connecting international LNG markets with African demand."],
+  ["End-to-end coordination", "From LNG sourcing to infrastructure deployment."],
+  ["Africa-focused execution", "Market understanding built around real operating environments."],
+  ["Operational follow-up", "Coordination across international energy operations."],
+];
+const benefits = [
+  ["Market intelligence", "We combine local market understanding with international supply intelligence."],
+  ["Execution discipline", "Clear responsibilities, documented milestones and continuous operational coordination."],
+  ["Compliance first", "Commercial, banking and operational processes structured around applicable compliance requirements."],
+  ["Long-term alignment", "Solutions designed around sustainable supply relationships and infrastructure that can scale with demand."],
+];
+const sectors = [
+  ["Governments & Utilities", "/tank-storage-final.png", "Industrial storage tank with MIR branding"],
+  ["Mining & Heavy Industry", "/industrial-site.jpg", "Industrial infrastructure"],
+  ["Manufacturing & Industrial Zones", "/import-ship.jpg", "International maritime logistics"],
+  ["Energy & Infrastructure Partners", "/field-worker-branded.png", "Energy infrastructure professional on site"],
 ];
 
-export default function Home(){
+export default function Home() {
   return <main id="top">
     <div className="home-hero-shell">
       <section className="home-hero">
         <SiteHeader overlay />
-        <Image src="/import-ship.jpg" alt="Navire de commerce transportant des conteneurs" fill priority sizes="100vw" className="cover-img"/>
-        <div className="home-hero-shade"/>
+        <Image src="/import-ship.jpg" alt="International maritime shipping and energy logistics" fill priority sizes="100vw" className="cover-img" />
+        <div className="home-hero-shade" />
         <div className="hero-main">
-          <p className="hero-kicker">Énergie · Commerce · Infrastructures</p>
-          <h1>Connecter l’énergie.<br/>Accélérer les <em>territoires.</em></h1>
-          <p>MIR Energie sécurise l’approvisionnement, la logistique et les infrastructures qui relient l’Afrique aux marchés internationaux.</p>
-          <div className="hero-buttons"><Link className="btn gold" href="/contact">Parler de votre projet <span>↗</span></Link><Link className="btn darkglass" href="/services">Explorer nos services</Link></div>
+          <p className="hero-kicker">LNG Supply · Energy Infrastructure · Global Markets</p>
+          <h1>Connecting global LNG to the markets shaping tomorrow.</h1>
+          <p>MIR ENERGY structures LNG supply, logistics, storage and regasification solutions that help governments, utilities and industrial clients secure reliable energy across Africa and emerging markets.</p>
+          <div className="hero-buttons"><Link className="btn gold" href="/contact">START A PROJECT <span>↗</span></Link><Link className="btn darkglass" href="/solutions">EXPLORE OUR SOLUTIONS</Link></div>
         </div>
-        <div className="hero-metrics">
-          <div><span>Clients accompagnés</span><b>20<sup>+</sup></b><small>Une relation fondée sur la confiance.</small></div>
-          <div><span>Projets réalisés</span><b>30<sup>+</sup></b><small>De l’étude au déploiement terrain.</small></div>
-          <div><span>Réseau international</span><b>7</b><small>Pays connectés à nos opérations.</small></div>
-          <div><span>Disponibilité</span><b>24<sup>/7</sup></b><small>Un suivi continu des opérations.</small></div>
+        <div className="hero-metrics hero-proof-cards">
+          {proof.map(([title, copy]) => <div key={title}><b>{title}</b><small>{copy}</small></div>)}
         </div>
       </section>
     </div>
-
     <section className="home-about page-pad">
-      <div className="editorial-heading">
-        <p className="overline">Qui sommes-nous</p>
-        <div><h2>Une expertise qui relie le terrain aux marchés internationaux.</h2><p>Nous simplifions les opérations énergétiques complexes pour les rendre plus fiables, plus lisibles et plus performantes.</p></div>
-      </div>
+      <div className="editorial-heading"><p className="overline">Who we are</p><div><h2>Global reach. Local execution.</h2><p>MIR ENERGY develops and coordinates energy solutions designed to strengthen supply security and unlock long-term industrial growth.</p></div></div>
       <div className="about-showcase">
-        <div className="about-image"><Image src="/field-worker-branded.png" alt="Professionnel du secteur énergétique portant les couleurs de MIR Energie" fill sizes="(max-width: 900px) 100vw, 55vw" className="cover-img"/><div className="image-badge"><b>30<sup>+</sup></b><span>projets menés<br/>avec exigence</span></div></div>
+        <div className="about-image"><Image src="/field-worker-branded.png" alt="Energy infrastructure professional on site" fill sizes="(max-width: 900px) 100vw, 55vw" className="cover-img" /><div className="image-badge editorial-badge"><b>LNG</b><span>Global reach.<br />Local execution.</span></div></div>
         <div className="about-content">
-          <p className="about-lead">MIR Energie accompagne les entreprises, institutions et territoires sur toute la chaîne de valeur : sourcing, transport, coordination technique et réalisation.</p>
-          <p className="about-body">Notre force repose sur une connaissance concrète des environnements africains, un réseau international fiable et une culture de la responsabilité opérationnelle.</p>
-          <div className="about-values"><article><b>01</b><h3>Maîtrise régionale</h3><p>Une lecture précise des réalités du terrain et des marchés.</p></article><article><b>02</b><h3>Réseau international</h3><p>Des partenaires qualifiés mobilisés selon chaque projet.</p></article></div>
-          <Link className="text-link" href="/a-propos">Découvrir MIR Energie <span>↗</span></Link>
+          <p className="about-lead">From international LNG sourcing to infrastructure delivery, we connect supply, logistics, market intelligence and local execution to build dependable energy pathways from source to end user.</p>
+          <div className="about-values"><article><b>01</b><h3>Regional intelligence</h3><p>Deep understanding of African energy markets, infrastructure needs and operating environments.</p></article><article><b>02</b><h3>Global network</h3><p>International supply, technical and commercial relationships mobilized around each project.</p></article></div>
+          <Link className="text-link" href="/about">DISCOVER MIR ENERGY <span>↗</span></Link>
         </div>
       </div>
     </section>
-
     <section className="services-block page-pad">
-      <SectionIntro light eyebrow="Nos expertises" title="Des solutions intégrées pour chaque étape du projet." copy="Une offre structurée pour faire circuler l’énergie, bâtir les infrastructures et créer une valeur durable."/>
+      <SectionIntro light eyebrow="Our solutions" title="Integrated energy solutions. From global supply to local infrastructure." copy="MIR ENERGY combines LNG sourcing, logistics, infrastructure development and commercial structuring to build reliable energy supply chains for governments, utilities and industrial clients." />
       <div className="service-showcase">
-        <Link href="/services" className="service-feature"><Image src="/silos-mir-branded-realistic.jpg" alt="Trois silos industriels portant le logo MIR Energie" fill sizes="(max-width: 900px) 100vw, 52vw" className="cover-img service-feature-image"/><div className="service-feature-shade"/><span>01 — Expertise principale</span><div><h3>{services[0][1]}</h3><p>{services[0][2]}</p><b>Découvrir le service ↗</b></div></Link>
-        <div className="service-card-list">{services.slice(1).map(([n,t,d])=><Link href="/services" className="service-card-row" key={n}><span>{n}</span><div><h3>{t}</h3><p>{d}</p></div><b>↗</b></Link>)}</div>
+        <Link href="/solutions#lng-supply" className="service-feature"><Image src="/silos-mir-branded-realistic.jpg" alt="Industrial storage infrastructure with MIR branding" fill sizes="(max-width: 900px) 100vw, 52vw" className="cover-img service-feature-image" /><div className="service-feature-shade" /><span>01 — LNG Supply & Trading</span><div><h3>{solutions[0].title}</h3><p>{solutions[0].summary}</p><b>EXPLORE OUR SOLUTIONS ↗</b></div></Link>
+        <div className="service-card-list">{solutions.slice(1).map(s => <Link href={`/solutions#${s.id}`} className="service-card-row" key={s.id}><span>{s.number}</span><div><h3>{s.title}</h3><p>{s.summary}</p></div><b>↗</b></Link>)}</div>
       </div>
     </section>
-
     <section className="why-us">
-      <div className="why-image"><Image src="/tank-storage.jpg" alt="Réservoir industriel de stockage sous un ciel coloré" fill sizes="(max-width: 800px) 100vw, 50vw" className="cover-img"/></div>
-      <div className="why-copy"><p className="overline">Pourquoi MIR Energie</p><h2>La maîtrise du terrain, portée par une vision globale.</h2><div className="benefit-grid"><div><b>01</b><h3>Fiabilité</h3><p>Des partenaires sélectionnés et un suivi documenté des opérations.</p></div><div><b>02</b><h3>Réactivité</h3><p>Une organisation agile capable de répondre aux réalités du terrain.</p></div><div><b>03</b><h3>Conformité</h3><p>Une exigence constante sur la sécurité et les standards applicables.</p></div><div><b>04</b><h3>Impact</h3><p>Des projets pensés pour produire une valeur économique et sociale durable.</p></div></div></div>
+      <div className="why-image"><Image src="/tank-storage.jpg" alt="Industrial energy storage tank" fill sizes="(max-width: 800px) 100vw, 50vw" className="cover-img" /></div>
+      <div className="why-copy"><p className="overline">Why MIR ENERGY</p><h2>Market intelligence. Execution discipline.</h2><div className="benefit-grid">{benefits.map(([title, copy], i) => <div key={title}><b>0{i + 1}</b><h3>{title}</h3><p>{copy}</p></div>)}</div></div>
     </section>
-
     <section className="markets page-pad">
-      <SectionIntro eyebrow="Secteurs accompagnés" title="Une énergie utile là où elle compte le plus."/>
-      <div className="market-grid">
-        <Link href="/services" className="market-card large"><Image src="/tank-storage-final.png" alt="Réservoir industriel portant le logo MIR Energie" fill sizes="50vw" className="cover-img"/><span>01</span><div><h3>Énergie & industrie</h3><p>Approvisionnement et solutions pour les sites à forts enjeux.</p></div></Link>
-        <Link href="/services" className="market-card"><Image src="/import-ship.jpg" alt="Transport maritime" fill sizes="25vw" className="cover-img"/><span>02</span><div><h3>Commerce & logistique</h3></div></Link>
-        <Link href="/services" className="market-card"><Image src="/field-worker-branded.png" alt="Projet d'infrastructure MIR Energie" fill sizes="25vw" className="cover-img"/><span>03</span><div><h3>Infrastructures</h3></div></Link>
-      </div>
+      <SectionIntro eyebrow="Sectors we serve" title="Reliable energy for the industries building tomorrow." />
+      <div className="market-grid market-grid-four">{sectors.map(([title, src, alt], i) => <Link href="/solutions" className="market-card" key={title}><Image src={src} alt={alt} fill sizes="(max-width: 900px) 100vw, 25vw" className="cover-img" /><span>0{i + 1}</span><div><h3>{title}</h3></div></Link>)}</div>
     </section>
-
-    <section className="countries"><p>Une présence qui relie les opportunités</p><div><span>ÉTATS UNIS</span><i>→</i><span>DUBAÏ</span><i>→</i><span>AFRIQUE DE L'OUEST</span></div><p>Côte d’Ivoire · Mali · Burkina Faso · Guinée · Liberia</p></section>
-
-    <section className="home-cta page-pad"><div><p className="overline">Votre prochain projet commence ici</p><h2>Construisons des solutions qui font avancer les territoires.</h2></div><Link className="btn gold" href="/contact">Échanger avec notre équipe <span>↗</span></Link></section>
-    <SiteFooter/>
+    <section className="countries"><p>Connecting global supply hubs to high-growth African markets.</p><div><span>NORTH AMERICA</span><i>→</i><span>MIDDLE EAST</span><i>→</i><span>WEST & CENTRAL AFRICA</span></div><p>Market reach</p></section>
+    <section className="home-cta page-pad"><div><p className="overline">Ready to move forward?</p><h2>Let’s build the energy pathway your market needs.</h2></div><Link className="btn gold" href="/contact">DISCUSS YOUR PROJECT <span>↗</span></Link></section>
+    <SiteFooter />
   </main>;
 }

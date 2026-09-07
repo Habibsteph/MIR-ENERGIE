@@ -11,7 +11,8 @@
     "start": "node .output/server/index.mjs",
     "test": "npm run build && node --test tests/rendered-html.test.mjs",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next --ignore-pattern .output --ignore-pattern .vercel",
-    "db:generate": "drizzle-kit generate"
+    "db:generate": "drizzle-kit generate",
+    "build:sites": "MIR_BUILD_TARGET=sites vite build && node scripts/prepare-sites-output.mjs"
   },
   "dependencies": {
     "drizzle-orm": "0.45.2",
