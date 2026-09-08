@@ -15,7 +15,7 @@ export const solutions = [
     id: "storage-regasification", number: "03", title: "Storage & Regasification", tab: "Storage & Regasification", subtitle: "Receiving and storage",
     summary: "Development and coordination of LNG receiving, storage and regasification infrastructure adapted to local demand and operating conditions.",
     description: "MIR ENERGY helps develop and coordinate the receiving, storage and regasification infrastructure required to make LNG accessible to local demand centers. Solutions are structured around capacity needs, site constraints, delivery profiles and future scalability.",
-    image: "/silos-mir-branded-realistic.jpg", alt: "Industrial storage infrastructure with MIR branding",
+    image: "/silos-mir-branded-realistic.png", alt: "Industrial storage infrastructure with MIR branding",
   },
   {
     id: "infrastructure", number: "04", title: "Energy Infrastructure Development", tab: "Infrastructure", subtitle: "Project development",

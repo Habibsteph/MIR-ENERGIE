@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { HeroVideo } from "@/components/HeroVideo";
 import { NativeLink as Link } from "@/components/NativeLink";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -29,7 +30,7 @@ export default function Home() {
     <div className="home-hero-shell">
       <section className="home-hero">
         <SiteHeader overlay />
-        <Image src="/import-ship.jpg" alt="International maritime shipping and energy logistics" fill priority sizes="100vw" className="cover-img" />
+        <HeroVideo />
         <div className="home-hero-shade" />
         <div className="hero-main">
           <p className="hero-kicker">LNG Supply · Energy Infrastructure · Global Markets</p>
@@ -56,7 +57,7 @@ export default function Home() {
     <section className="services-block page-pad">
       <SectionIntro light eyebrow="Our solutions" title="Integrated energy solutions. From global supply to local infrastructure." copy="MIR ENERGY combines LNG sourcing, logistics, infrastructure development and commercial structuring to build reliable energy supply chains for governments, utilities and industrial clients." />
       <div className="service-showcase">
-        <Link href="/solutions#lng-supply" className="service-feature"><Image src="/silos-mir-branded-realistic.jpg" alt="Industrial storage infrastructure with MIR branding" fill sizes="(max-width: 900px) 100vw, 52vw" className="cover-img service-feature-image" /><div className="service-feature-shade" /><span>01 — LNG Supply & Trading</span><div><h3>{solutions[0].title}</h3><p>{solutions[0].summary}</p><b>EXPLORE OUR SOLUTIONS ↗</b></div></Link>
+        <Link href="/solutions#lng-supply" className="service-feature"><Image src="/silos-mir-branded-realistic.png" alt="Industrial storage infrastructure with MIR branding" fill sizes="(max-width: 900px) 100vw, 52vw" className="cover-img service-feature-image" /><div className="service-feature-shade" /><span>01 — LNG Supply & Trading</span><div><h3>{solutions[0].title}</h3><p>{solutions[0].summary}</p><b>EXPLORE OUR SOLUTIONS ↗</b></div></Link>
         <div className="service-card-list">{solutions.slice(1).map(s => <Link href={`/solutions#${s.id}`} className="service-card-row" key={s.id}><span>{s.number}</span><div><h3>{s.title}</h3><p>{s.summary}</p></div><b>↗</b></Link>)}</div>
       </div>
     </section>

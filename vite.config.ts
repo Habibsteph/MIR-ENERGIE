@@ -7,14 +7,15 @@ import { defineConfig } from "vite";
 const isSitesBuild = process.env.MIR_BUILD_TARGET === "sites";
 const isCodexSeatbeltSandbox = process.env.CODEX_SANDBOX === "seatbelt";
 
-export default defineConfig({
+export default defineConfig(({ command }) => ({
   server: isCodexSeatbeltSandbox
     ? { watch: { useFsEvents: false, usePolling: true } }
     : undefined,
-  plugins: [tailwindcss(), vinext(), nitro(isSitesBuild ? {
+  // Nitro packages production output; Vinext owns the local RSC module runner.
+  plugins: [tailwindcss(), vinext(), command === "build" && nitro(isSitesBuild ? {
     preset: "cloudflare_module",
     compatibilityDate: "2026-09-07",
     output: { dir: "dist", serverDir: "dist/server", publicDir: "dist/client" },
     cloudflare: { deployConfig: false },
   } : {})],
-});
+}));
