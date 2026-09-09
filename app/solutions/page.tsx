@@ -5,7 +5,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { pageMetadata } from "@/lib/metadata";
 
-export const metadata = pageMetadata("Energy Solutions | MIR ENERGY", "Explore MIR ENERGY solutions for LNG supply, marine logistics, storage, regasification and energy infrastructure development.", "/solutions");
+export const metadata = pageMetadata("Energy Solutions | MIR ENERGY", "Explore proposed MIR ENERGY services across oil, LNG, LPG, gas, energy infrastructure and electrification.", "/solutions");
 
 const steps = [
   ["Understand", "We define the market need, demand profile, infrastructure constraints and commercial priorities."],
@@ -27,11 +27,11 @@ export default function SolutionsPage() {
       <div className="services-cover-content">
         <p className="overline">MIR ENERGY Solutions</p>
         <h1>Energy security,<br />engineered end to end.</h1>
-        <p>Four complementary areas of expertise: LNG supply and trading, logistics, storage and regasification, and energy infrastructure development. Explore each service to find the support your project needs.</p>
+        <p>Three complementary domains: Oil, LNG / LPG / Gas, and Energy / Electrification. Explore the proposed services within each domain, from supply and logistics to infrastructure planning.</p>
         <Link className="btn gold" href="/contact">DISCUSS YOUR PROJECT <span>↗</span></Link>
       </div>
     </section>
-    <section className="page-pad solutions-overview"><p className="overline">Our solutions</p><h2>Four areas of expertise. One coordinated approach.</h2><SolutionCards /></section>
+    <section className="page-pad solutions-overview"><p className="overline">Our solutions</p><h2>Three energy domains. One coordinated approach.</h2><SolutionCards /></section>
     <section className="services-why page-pad">
       <header className="services-why-heading"><p className="overline">How we work</p><h2>Understand. Structure. Execute.</h2></header>
       <div className="services-steps" aria-label="Our three-step process">{steps.map(([title, copy], i) => <div key={title}><b>0{i + 1}</b><span>{title}</span><p>{copy}</p></div>)}</div>

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { homeServices } from "@/lib/home-services";
 import { HeroVideo } from "@/components/HeroVideo";
 import { NativeLink as Link } from "@/components/NativeLink";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -36,7 +37,6 @@ export default function Home() {
           <p className="hero-kicker">Supply · Logistics · Storage & Regasification · Infrastructure</p>
           <h1>Integrated energy solutions for the markets shaping tomorrow.</h1>
           <p>MIR ENERGY brings together LNG supply and trading, logistics, storage and regasification, and energy infrastructure development to support governments, utilities and industry across Africa and emerging markets.</p>
-          <div className="hero-buttons"><Link className="btn gold" href="/contact">START A PROJECT <span>↗</span></Link><Link className="btn darkglass" href="/solutions">EXPLORE OUR SOLUTIONS</Link></div>
         </div>
         <div className="hero-metrics hero-proof-cards">
           {proof.map(([title, copy]) => <div key={title}><b>{title}</b><small>{copy}</small></div>)}
@@ -56,7 +56,7 @@ export default function Home() {
     </section>
     <section className="services-block page-pad">
       <SectionIntro light eyebrow="Our solutions" title="Integrated energy solutions. From global supply to local infrastructure." copy="MIR ENERGY combines LNG sourcing, logistics, infrastructure development and commercial structuring to build reliable energy supply chains for governments, utilities and industrial clients." />
-      <SolutionCards light />
+      <SolutionCards light items={homeServices} />
     </section>
     <section className="why-us">
       <div className="why-image"><Image src="/tank-storage.jpg" alt="Industrial energy storage tank" fill sizes="(max-width: 800px) 100vw, 50vw" className="cover-img" /></div>

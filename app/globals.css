@@ -450,3 +450,25 @@
 .storage-solution-cover>.cover-img{width:80%!important;left:auto!important;right:0;object-position:center 86%;animation:none;transform:none}
 .storage-solution-cover .services-cover-shade{background:linear-gradient(90deg,#071d2e 0%,#071d2ef5 24%,#071d2ea6 47%,#071d2e26 72%,#071d2e0d 100%)}
 @media(max-width:900px){.storage-solution-cover>.cover-img{width:100%!important;object-position:center 88%}}
+
+/* Slow, clean fade for the homepage introduction. */
+@keyframes heroTextFade{from{opacity:0}to{opacity:1}}
+.hero-main .hero-kicker,.hero-main h1,.hero-main>p:last-of-type{animation:heroTextFade 2.4s ease-out both;transform:none}
+.hero-main .hero-kicker{animation-delay:.2s}
+.hero-main h1{animation-delay:.45s}
+.hero-main>p:last-of-type{animation-delay:.75s}
+@media(prefers-reduced-motion:reduce){.hero-main .hero-kicker,.hero-main h1,.hero-main>p:last-of-type{animation:none;opacity:1}}
+
+.solution-equal-card#logistics .solution-card-image img{object-position:center 20%}
+
+/* Three-domain demonstration structure. */
+.demo-content-notice{display:flex;justify-content:center;align-items:center;gap:14px;flex-wrap:wrap;padding:12px 24px;background:#fff1de;color:#59330b;font-size:14px;line-height:1.5;text-align:center}
+.demo-content-notice strong{letter-spacing:.06em;font-size:12px}
+.solution-domain-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+.solution-domain-grid .solution-card-copy{padding:26px}
+.solution-domain-grid .solution-card-copy h3{font-size:26px}
+.solution-equal-card#oil .solution-card-image img{object-position:center 20%}
+.solution-equal-card#gas .solution-card-image img{object-position:center 85%}
+.solution-scope article p{color:#c6d3d9;font-size:16px;line-height:1.7;margin:12px 0 0}
+.solution-related>div{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:900px){.solution-domain-grid{grid-template-columns:1fr}.solution-domain-grid .solution-card-image{height:320px}.solution-related>div{grid-template-columns:1fr}}

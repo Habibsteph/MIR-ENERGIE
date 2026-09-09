@@ -6,7 +6,7 @@ import test, { after, before } from "node:test";
 let server;
 let origin;
 const pages = new Map();
-const routes = ["/solutions/lng-supply-trading", "/solutions/lng-logistics", "/solutions/storage-regasification", "/solutions/energy-infrastructure", "/", "/solutions", "/about", "/contact", "/legal-notice", "/privacy-policy"];
+const routes = ["/solutions/oil", "/solutions/lng-lpg-gas", "/solutions/energy-electrification", "/", "/solutions", "/about", "/contact", "/legal-notice", "/privacy-policy"];
 before(async () => {
   server = spawn(process.execPath, [".output/server/index.mjs"], {
     cwd: new URL("../", import.meta.url),
@@ -57,7 +57,7 @@ test("all public pages render English content and route-specific metadata", () =
 });
 
 test("old page URLs redirect permanently to their replacements", async () => {
-  for (const [oldPath, newPath] of [["/services", "/solutions"], ["/a-propos", "/about"]]) {
+  for (const [oldPath, newPath] of [["/services", "/solutions"], ["/a-propos", "/about"], ["/solutions/lng-supply-trading", "/solutions/lng-lpg-gas"], ["/solutions/lng-logistics", "/solutions/lng-lpg-gas"], ["/solutions/storage-regasification", "/solutions/lng-lpg-gas"], ["/solutions/energy-infrastructure", "/solutions/energy-electrification"]]) {
     const response = await fetch(origin + oldPath, { redirect: "manual" });
     assert.equal(response.status, 308, oldPath);
     assert.equal(new URL(response.headers.get("location"), origin).pathname, newPath);
@@ -71,11 +71,11 @@ test("internal links resolve and solution anchors point to distinct offers", asy
       const href = match[1].replaceAll("&amp;", "&");
       const target = new URL(href, origin + route);
       if (target.origin !== origin) continue;
-      assert.ok(pages.has(target.pathname), `Missing route ${href} on ${route}`);
+      assert.ok(pages.has(target.pathname) || ["/solutions/lng-supply-trading", "/solutions/lng-logistics", "/solutions/storage-regasification", "/solutions/energy-infrastructure"].includes(target.pathname), `Missing route ${href} on ${route}`);
       if (target.hash) assert.ok(pages.get(target.pathname).includes(`id="${target.hash.slice(1)}"`), `Missing anchor ${href}`);
     }
   }
-  for (const id of ["lng-supply", "logistics", "storage-regasification", "infrastructure"]) {
+  for (const id of ["oil", "gas", "energy"]) {
     assert.ok(pages.get("/solutions").includes(`id="${id}"`));
   }
 });
@@ -102,4 +102,18 @@ test("every rendered image and stylesheet can be served", async () => {
     assert.equal(response.status, 200, url);
     await response.body?.cancel();
   }
+});
+
+
+test("draft solutions remain excluded from search indexing without a visible banner", () => {
+  for (const [route, html] of pages) {
+    if (!route.startsWith("/solutions")) continue;
+    assert.doesNotMatch(visibleHtml(html), /DEMONSTRATION VERSION/, route);
+    assert.match(html, /<meta name="robots" content="noindex, follow"/, route);
+  }
+});
+
+test("unknown solution names return a 404", async () => {
+  const response = await fetch(origin + "/solutions/not-a-service");
+  assert.equal(response.status, 404);
 });
