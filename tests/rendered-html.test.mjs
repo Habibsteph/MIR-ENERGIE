@@ -6,7 +6,7 @@ import test, { after, before } from "node:test";
 let server;
 let origin;
 const pages = new Map();
-const routes = ["/", "/solutions", "/about", "/contact", "/legal-notice", "/privacy-policy"];
+const routes = ["/solutions/lng-supply-trading", "/solutions/lng-logistics", "/solutions/storage-regasification", "/solutions/energy-infrastructure", "/", "/solutions", "/about", "/contact", "/legal-notice", "/privacy-policy"];
 before(async () => {
   server = spawn(process.execPath, [".output/server/index.mjs"], {
     cwd: new URL("../", import.meta.url),

@@ -4,7 +4,7 @@ import { NativeLink as Link } from "@/components/NativeLink";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SectionIntro } from "@/components/SectionIntro";
-import { solutions } from "@/lib/content";
+import { SolutionCards } from "@/components/SolutionCards";
 
 const proof = [
   ["Global supply network", "Connecting international LNG markets with African demand."],
@@ -33,9 +33,9 @@ export default function Home() {
         <HeroVideo />
         <div className="home-hero-shade" />
         <div className="hero-main">
-          <p className="hero-kicker">LNG Supply · Energy Infrastructure · Global Markets</p>
-          <h1>Connecting global LNG to the markets shaping tomorrow.</h1>
-          <p>MIR ENERGY structures LNG supply, logistics, storage and regasification solutions that help governments, utilities and industrial clients secure reliable energy across Africa and emerging markets.</p>
+          <p className="hero-kicker">Supply · Logistics · Storage & Regasification · Infrastructure</p>
+          <h1>Integrated energy solutions for the markets shaping tomorrow.</h1>
+          <p>MIR ENERGY brings together LNG supply and trading, logistics, storage and regasification, and energy infrastructure development to support governments, utilities and industry across Africa and emerging markets.</p>
           <div className="hero-buttons"><Link className="btn gold" href="/contact">START A PROJECT <span>↗</span></Link><Link className="btn darkglass" href="/solutions">EXPLORE OUR SOLUTIONS</Link></div>
         </div>
         <div className="hero-metrics hero-proof-cards">
@@ -46,7 +46,7 @@ export default function Home() {
     <section className="home-about page-pad">
       <div className="editorial-heading"><p className="overline">Who we are</p><div><h2>Global reach. Local execution.</h2><p>MIR ENERGY develops and coordinates energy solutions designed to strengthen supply security and unlock long-term industrial growth.</p></div></div>
       <div className="about-showcase">
-        <div className="about-image"><Image src="/field-worker-branded.png" alt="Energy infrastructure professional on site" fill sizes="(max-width: 900px) 100vw, 55vw" className="cover-img" /><div className="image-badge editorial-badge"><b>LNG</b><span>Global reach.<br />Local execution.</span></div></div>
+        <div className="about-image"><Image src="/field-worker-branded.png" alt="Energy infrastructure professional on site" fill sizes="(max-width: 900px) 100vw, 55vw" className="cover-img" /><div className="image-badge editorial-badge"><b>MIR</b><span>Global reach.<br />Local execution.</span></div></div>
         <div className="about-content">
           <p className="about-lead">From international LNG sourcing to infrastructure delivery, we connect supply, logistics, market intelligence and local execution to build dependable energy pathways from source to end user.</p>
           <div className="about-values"><article><b>01</b><h3>Regional intelligence</h3><p>Deep understanding of African energy markets, infrastructure needs and operating environments.</p></article><article><b>02</b><h3>Global network</h3><p>International supply, technical and commercial relationships mobilized around each project.</p></article></div>
@@ -56,10 +56,7 @@ export default function Home() {
     </section>
     <section className="services-block page-pad">
       <SectionIntro light eyebrow="Our solutions" title="Integrated energy solutions. From global supply to local infrastructure." copy="MIR ENERGY combines LNG sourcing, logistics, infrastructure development and commercial structuring to build reliable energy supply chains for governments, utilities and industrial clients." />
-      <div className="service-showcase">
-        <Link href="/solutions#lng-supply" className="service-feature"><Image src="/silos-mir-branded-realistic.png" alt="Industrial storage infrastructure with MIR branding" fill sizes="(max-width: 900px) 100vw, 52vw" className="cover-img service-feature-image" /><div className="service-feature-shade" /><span>01 — LNG Supply & Trading</span><div><h3>{solutions[0].title}</h3><p>{solutions[0].summary}</p><b>EXPLORE OUR SOLUTIONS ↗</b></div></Link>
-        <div className="service-card-list">{solutions.slice(1).map(s => <Link href={`/solutions#${s.id}`} className="service-card-row" key={s.id}><span>{s.number}</span><div><h3>{s.title}</h3><p>{s.summary}</p></div><b>↗</b></Link>)}</div>
-      </div>
+      <SolutionCards light />
     </section>
     <section className="why-us">
       <div className="why-image"><Image src="/tank-storage.jpg" alt="Industrial energy storage tank" fill sizes="(max-width: 800px) 100vw, 50vw" className="cover-img" /></div>

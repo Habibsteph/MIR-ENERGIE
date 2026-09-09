@@ -413,3 +413,35 @@
 .hero-background-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;background:var(--navy)}
 .hero-video-toggle{position:relative;align-self:flex-end;order:1;z-index:6;margin:0 24px 18px;padding:10px 14px;border:1px solid #ffffff70;border-radius:3px;background:#071d2ed9;color:#fff;font-size:14px;cursor:pointer}
 .home-hero .hero-proof-cards{order:2}
+
+/* Equal visibility for the four services. */
+.solution-equal-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}
+.solution-equal-card{display:flex;flex-direction:column;border:1px solid #dce3e6;background:#fff;min-width:0;scroll-margin-top:30px}
+.solution-card-image{position:relative;height:280px;overflow:hidden}
+.solution-card-image>span{position:absolute;top:20px;left:20px;background:var(--navy);color:white;padding:9px 12px;font-size:14px}
+.solution-card-image img{transition:transform .4s ease}.solution-equal-card:hover img{transform:scale(1.025)}
+.solution-card-copy{padding:32px;display:flex;flex-direction:column;flex:1}
+.solution-card-copy h3{font-size:28px;line-height:1.2;margin-bottom:18px}
+.solution-card-copy p{font-size:16px;line-height:1.7;color:var(--muted);margin-bottom:28px}
+.solution-card-link{margin-top:auto;color:var(--gold);font-size:14px;font-weight:700;display:flex;justify-content:space-between;gap:12px}
+.on-dark .solution-equal-card{background:#0a2b42;border-color:#ffffff26;color:white}.on-dark .solution-card-copy p{color:#c6d3d9}
+.solutions-overview>h2,.solution-detail-intro h2,.solution-client-grid h2{font-size:clamp(32px,4vw,52px);line-height:1.1;letter-spacing:-.035em}
+.solutions-overview>h2{max-width:850px;margin-bottom:45px}
+.solutions-menu{position:relative}.solutions-menu summary{cursor:pointer;list-style:none;padding:10px 0;display:flex;gap:8px;align-items:center}.solutions-menu summary::-webkit-details-marker{display:none}
+.solutions-menu summary.is-active{color:var(--gold);font-weight:800}
+.solutions-dropdown{position:absolute;top:100%;left:-20px;width:325px;background:var(--navy);border:1px solid #ffffff30;box-shadow:0 15px 35px #0004;padding:12px 20px;z-index:30}
+.main-nav .solutions-dropdown a{display:block;padding:14px 0;line-height:1.4;font-size:14px;opacity:1;border-bottom:1px solid #ffffff20}
+.main-nav .solutions-dropdown a:last-child{border:0}.solutions-dropdown a[aria-current=page]{color:var(--gold)}
+.solution-breadcrumb{font-size:14px;margin-bottom:30px;display:flex;gap:12px}.solution-breadcrumb a{text-decoration:underline;text-underline-offset:4px}
+.solution-detail-intro{max-width:1240px;margin:auto}.solution-detail-intro>p:last-child,.solution-client-grid p:not(.overline){font-size:18px;line-height:1.8;color:var(--muted)}
+.solution-scope article{display:flex;gap:25px;border-top:1px solid #ffffff30;padding:26px 0;color:white}.solution-scope article>span{color:var(--gold);font-size:14px}.solution-scope h3{font-size:23px;line-height:1.5;margin:0}
+.solution-client-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px}.solution-related{background:#f4f7f8}.solution-related>div{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:25px;margin-bottom:40px}.solution-related>div a{padding:25px;border:1px solid #dce3e6;font-size:20px;display:flex;justify-content:space-between;gap:16px}.solution-related a span{color:var(--gold)}
+@media(max-width:900px){.solutions-dropdown{position:static;width:100%;box-shadow:none;margin-top:10px}.solutions-menu{width:100%}.solution-related>div{grid-template-columns:1fr}.solution-client-grid{grid-template-columns:1fr}}
+@media(max-width:700px){.solution-equal-grid{grid-template-columns:1fr}.solution-card-image{height:250px}.solution-card-copy{padding:25px}.solution-card-copy h3{font-size:25px}}
+@media(prefers-reduced-motion:reduce){.solution-card-image img{transition:none}.solution-equal-card:hover img{transform:none}}
+
+/* Aligned disclosure icon, shared by hover and click interactions. */
+.solutions-menu summary{gap:7px}
+.solutions-chevron{display:block;flex:none;transition:transform .2s ease}
+.solutions-menu[open] .solutions-chevron{transform:rotate(180deg)}
+@media(prefers-reduced-motion:reduce){.solutions-chevron{transition:none}}

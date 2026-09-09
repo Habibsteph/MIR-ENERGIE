@@ -30,7 +30,7 @@ export function HeroVideo() {
       onPlay={() => setPlaying(true)}
       onPause={() => setPlaying(false)}
     >
-      <source src="/home-hero-ship.mp4" type="video/mp4" />
+      <source src="/home-hero-ship.mp4?v=20260908-2044" type="video/mp4" />
     </video>
     <button
       type="button"
