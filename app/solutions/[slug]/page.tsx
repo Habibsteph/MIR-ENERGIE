@@ -19,7 +19,7 @@ export default async function SolutionPage({ params }: Props) {
   const s = solutions.find(s => s.slug === slug);
   if (!s) notFound();
   return <main id="top">
-    <section className="services-cover"><Image src={s.image} alt={s.alt} fill priority sizes="100vw" className="cover-img" /><div className="services-cover-shade" /><SiteHeader overlay />
+    <section className={`services-cover${s.id === "storage-regasification" ? " storage-solution-cover" : ""}`}><Image src={s.image} alt={s.alt} fill priority sizes="100vw" className="cover-img" /><div className="services-cover-shade" /><SiteHeader overlay />
       <div className="services-cover-content"><nav className="solution-breadcrumb" aria-label="Breadcrumb"><Link href="/">Home</Link><span aria-hidden="true"> / </span><Link href="/solutions">Solutions</Link></nav><p className="overline">MIR ENERGY Solutions</p><h1>{s.title}</h1><p>{s.summary}</p><Link className="btn gold" href="/contact">DISCUSS YOUR PROJECT <span>↗</span></Link></div>
     </section>
     <section className="page-pad solution-detail-intro"><p className="overline">{s.subtitle}</p><h2>{s.headline}</h2><p>{s.description}</p></section>

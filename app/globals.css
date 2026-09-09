@@ -445,3 +445,8 @@
 .solutions-chevron{display:block;flex:none;transition:transform .2s ease}
 .solutions-menu[open] .solutions-chevron{transform:rotate(180deg)}
 @media(prefers-reduced-motion:reduce){.solutions-chevron{transition:none}}
+
+/* Storage hero: pull back and keep the tank branding in the visible crop. */
+.storage-solution-cover>.cover-img{width:80%!important;left:auto!important;right:0;object-position:center 86%;animation:none;transform:none}
+.storage-solution-cover .services-cover-shade{background:linear-gradient(90deg,#071d2e 0%,#071d2ef5 24%,#071d2ea6 47%,#071d2e26 72%,#071d2e0d 100%)}
+@media(max-width:900px){.storage-solution-cover>.cover-img{width:100%!important;object-position:center 88%}}
