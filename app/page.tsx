@@ -36,7 +36,7 @@ export default function Home() {
         <div className="hero-main">
           <p className="hero-kicker">Supply · Logistics · Storage & Regasification · Infrastructure</p>
           <h1>Integrated energy solutions for the markets shaping tomorrow.</h1>
-          <p>MIR ENERGY brings together LNG supply and trading, logistics, storage and regasification, and energy infrastructure development to support governments, utilities and industry across Africa and emerging markets.</p>
+          <p>MIR ENERGY brings together LNG and LPG supply and trading, oil and petroleum products, logistics, storage and regasification, electrification, and energy infrastructure development to support governments, utilities, industries, and communities across Africa and emerging markets.</p>
         </div>
         <div className="hero-metrics hero-proof-cards">
           {proof.map(([title, copy]) => <div key={title}><b>{title}</b><small>{copy}</small></div>)}

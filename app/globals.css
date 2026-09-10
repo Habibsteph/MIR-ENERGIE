@@ -509,3 +509,8 @@
 @media(prefers-reduced-motion:reduce){.site-loader{transition:none;animation-duration:0s}.site-loader-line{animation:none}}
 
 @media(max-width:900px){.site-loader-logo{width:104px}}
+
+/* Frame the original artwork without its large surrounding margins. */
+.main-logo-original{position:relative;overflow:hidden;background:transparent}
+.main-logo-original img{position:static;width:100%;height:100%;object-fit:contain;transform:none}
+.main-logo-original:hover img{transform:none}

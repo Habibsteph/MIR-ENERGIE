@@ -79,7 +79,7 @@ export function SiteHeader({ overlay = false }: { overlay?: boolean }) {
     { href: "/contact", label: "Contact" },
   ];
   return <header className={`main-header ${overlay ? "is-overlay" : ""} ${scrollVisible || open ? "mobile-scroll-visible" : ""} ${atTop && pathname === "/" && !open ? "mobile-video-overlay" : ""}`}>
-    <Link className="main-logo" href="/"><Image src="/logo-mir-white.png" alt="MIR ENERGY" width={190} height={94} priority /></Link>
+    <Link className="main-logo main-logo-original" href="/"><Image src="/logo-mir-header.png" alt="MIR ENERGY" width={1584} height={851} priority /></Link>
     <nav id="main-navigation" className={open ? "main-nav open" : "main-nav"} aria-label="Main navigation">
       {links.map((link) => {
         const active = pathname === link.href;
