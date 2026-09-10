@@ -8,8 +8,23 @@ import { solutions } from "@/lib/content";
 
 export function SiteHeader({ overlay = false }: { overlay?: boolean }) {
   const [open, setOpen] = useState(false);
+  const [scrollVisible, setScrollVisible] = useState(false);
   const pathname = usePathname();
   const submenu = useRef<HTMLDetailsElement>(null);
+  useEffect(() => {
+    let previousY = window.scrollY;
+    setScrollVisible(false);
+    setOpen(false);
+    const onScroll = () => {
+      const y = Math.max(0, window.scrollY);
+      if (y <= 12) setScrollVisible(false);
+      else if (Math.abs(y - previousY) > 4) setScrollVisible(y > previousY);
+      else return;
+      previousY = y;
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [pathname]);
   useEffect(() => {
     const menu = submenu.current;
     let closeTimer: ReturnType<typeof setTimeout> | undefined;
@@ -60,7 +75,7 @@ export function SiteHeader({ overlay = false }: { overlay?: boolean }) {
     { href: "/about", label: "About" },
     { href: "/contact", label: "Contact" },
   ];
-  return <header className={`main-header ${overlay ? "is-overlay" : ""}`}>
+  return <header className={`main-header ${overlay ? "is-overlay" : ""} ${scrollVisible || open ? "mobile-scroll-visible" : ""}`}>
     <Link className="main-logo" href="/"><Image src="/logo-mir-white.png" alt="MIR ENERGY" width={190} height={94} priority /></Link>
     <nav id="main-navigation" className={open ? "main-nav open" : "main-nav"} aria-label="Main navigation">
       {links.map((link) => {

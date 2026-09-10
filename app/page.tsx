@@ -48,14 +48,14 @@ export default function Home() {
       <div className="about-showcase">
         <div className="about-image"><Image src="/field-worker-branded.png" alt="Energy infrastructure professional on site" fill sizes="(max-width: 900px) 100vw, 55vw" className="cover-img" /><div className="image-badge editorial-badge"><b>MIR</b><span>Global reach.<br />Local execution.</span></div></div>
         <div className="about-content">
-          <p className="about-lead">From international LNG sourcing to infrastructure delivery, we connect supply, logistics, market intelligence and local execution to build dependable energy pathways from source to end user.</p>
+          <p className="about-lead">From international oil, LNG and LPG sourcing to electricity and infrastructure delivery, we connect supply, logistics, market intelligence and local execution to build dependable energy pathways from source to end user.</p>
           <div className="about-values"><article><b>01</b><h3>Regional intelligence</h3><p>Deep understanding of African energy markets, infrastructure needs and operating environments.</p></article><article><b>02</b><h3>Global network</h3><p>International supply, technical and commercial relationships mobilized around each project.</p></article></div>
           <Link className="text-link" href="/about">DISCOVER MIR ENERGY <span>↗</span></Link>
         </div>
       </div>
     </section>
     <section className="services-block page-pad">
-      <SectionIntro light eyebrow="Our solutions" title="Integrated energy solutions. From global supply to local infrastructure." copy="MIR ENERGY combines LNG sourcing, logistics, infrastructure development and commercial structuring to build reliable energy supply chains for governments, utilities and industrial clients." />
+      <SectionIntro light eyebrow="Our solutions" title="Integrated energy solutions. From global supply to local infrastructure." copy="MIR ENERGY combines oil, LNG and LPG sourcing, logistics, electrification and infrastructure development and commercial structuring to build reliable energy supply chains for governments, utilities and industrial clients." />
       <SolutionCards light items={homeServices} />
     </section>
     <section className="why-us">

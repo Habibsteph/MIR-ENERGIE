@@ -1,4 +1,5 @@
 import { MotionObserver } from "@/components/MotionObserver";
+import { SiteLoader } from "@/components/SiteLoader";
 import { pageMetadata } from "@/lib/metadata";
 import "./globals.css";
 
@@ -9,5 +10,5 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en"><body><MotionObserver />{children}</body></html>;
+  return <html lang="en"><body><SiteLoader /><MotionObserver />{children}</body></html>;
 }
