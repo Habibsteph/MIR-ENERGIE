@@ -490,6 +490,7 @@
 @media(max-width:900px){
   .main-header,.main-header.is-overlay{position:fixed;inset:0 0 auto;z-index:100;background:var(--navy);transform:translateY(-100%);visibility:hidden;transition:transform .25s ease,visibility .25s}
   .main-header.mobile-scroll-visible{transform:translateY(0);visibility:visible}
+  .main-header.mobile-video-overlay{transform:translateY(0);visibility:visible;background:transparent}
   .main-nav.open{max-height:calc(100svh - 76px);overflow-y:auto}
 }
 @media(max-width:700px){

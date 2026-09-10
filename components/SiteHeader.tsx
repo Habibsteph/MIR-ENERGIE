@@ -9,14 +9,17 @@ import { solutions } from "@/lib/content";
 export function SiteHeader({ overlay = false }: { overlay?: boolean }) {
   const [open, setOpen] = useState(false);
   const [scrollVisible, setScrollVisible] = useState(false);
+  const [atTop, setAtTop] = useState(true);
   const pathname = usePathname();
   const submenu = useRef<HTMLDetailsElement>(null);
   useEffect(() => {
     let previousY = window.scrollY;
+    setAtTop(previousY <= 12);
     setScrollVisible(false);
     setOpen(false);
     const onScroll = () => {
       const y = Math.max(0, window.scrollY);
+      setAtTop(y <= 12);
       if (y <= 12) setScrollVisible(false);
       else if (Math.abs(y - previousY) > 4) setScrollVisible(y > previousY);
       else return;
@@ -75,7 +78,7 @@ export function SiteHeader({ overlay = false }: { overlay?: boolean }) {
     { href: "/about", label: "About" },
     { href: "/contact", label: "Contact" },
   ];
-  return <header className={`main-header ${overlay ? "is-overlay" : ""} ${scrollVisible || open ? "mobile-scroll-visible" : ""}`}>
+  return <header className={`main-header ${overlay ? "is-overlay" : ""} ${scrollVisible || open ? "mobile-scroll-visible" : ""} ${atTop && pathname === "/" && !open ? "mobile-video-overlay" : ""}`}>
     <Link className="main-logo" href="/"><Image src="/logo-mir-white.png" alt="MIR ENERGY" width={190} height={94} priority /></Link>
     <nav id="main-navigation" className={open ? "main-nav open" : "main-nav"} aria-label="Main navigation">
       {links.map((link) => {
