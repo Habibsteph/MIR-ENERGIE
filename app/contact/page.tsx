@@ -8,8 +8,8 @@ import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata("Contact MIR ENERGY | Start an LNG or Energy Project", "Contact MIR ENERGY to discuss LNG supply, logistics, storage, regasification, infrastructure or strategic energy partnerships.", "/contact");
 const contactPoints = [
-  { icon: Phone, label: "Phone", value: company.phone || "Contact channel opening soon", href: company.phone ? `tel:${company.phone.replace(/[^+\d]/g, "")}` : null },
-  { icon: Mail, label: "Email", value: company.email || "Contact channel opening soon", href: company.email ? `mailto:${company.email}` : null },
+  { icon: Phone, label: "Phone", value: company.phone || "301-201-6737", href: company.phone ? `tel:${company.phone.replace(/[^+\d]/g, "")}` : null },
+  { icon: Mail, label: "Email", value: company.email || "contact@mirenergy.us", href: company.email ? `mailto:${company.email}` : null },
   { icon: MapPin, label: "Market reach", value: "West Africa · Central Africa · Dubai · United States", href: null },
 ];
 const steps = [
